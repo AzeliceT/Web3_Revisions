@@ -1,55 +1,44 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+
+import AddPerson from "../AddPerson/AddPerson"
+import Person from "../Person/Person"
+import FilterPersons from '../FilterPersons/FilterPersons'
+import PersonsAPI from "../../services/persons"
+
+
 
 const App = () => {
-  const [persons, setPersons] = useState([{ name: 'Arto Hellas', number: '040-1234567' }])
-  const [newName, setNewName] = useState('')
-  const [newNumber, setNewNumber] = useState('')
 
-  const handleNameChange = (event) => {
-    setNewName(event.target.value)
+  const [persons, setPersons] = useState([])
+  const [filterValue, setFilterValue] = useState('')
+
+  const initialLoad = () => {
+    PersonsAPI
+      .getAll()
+      .then(persons => setPersons(persons))
+      .catch(error => console.warn(error))
+  }
+  useEffect(initialLoad, [])
+
+  const createPerson = (person) => {
+    PersonsAPI
+      .create(person)
+      .then(createdPerson => setPersons([...persons, createdPerson]))
   }
 
-  const handleNumberChange = (event) => {
-    setNewNumber(event.target.value)
-  }
-
-  const addPerson = (event) => {
-    event.preventDefault()
-    const newPerson = { name: newName, number: newNumber }
-    const personExists = persons.some(person => person.name === newName)
-  
-    if (personExists) {
-      alert(`${newName} is already added to phonebook`)
-    } else {
-      setPersons(persons.concat(newPerson))
-      setNewName('')
-      setNewNumber('')
-    }
-  }
+  const filteredPersons = persons.filter(person => person.name.toLowerCase().includes(filterValue.toLowerCase()))
 
   return (
     <div>
       <h2>Phonebook</h2>
-      <form onSubmit={addPerson}>
-        <div>
-          name: <input value={newName} onChange={handleNameChange} />
-        </div>
-        <div>
-          number: <input value={newNumber} onChange={handleNumberChange} />
-        </div>
-        <div>
-          <button type="submit">add</button>
-        </div>
-      </form>
-      <div>debug: {newName} {newNumber}</div>
+      <FilterPersons filterValue={filterValue} changeFilter={setFilterValue} />
+      <h2>Add a new</h2>
+      <AddPerson createPerson={createPerson} />
       <h2>Numbers</h2>
-      <ul>
-        {persons.map((person, index) => (
-          <li key={index}>{person.name} {person.number}</li>
-        ))}
-      </ul>
+      {filteredPersons.map(person => <Person key={person.id} person={person} />)}
     </div>
   )
+
 }
 
 export default App
