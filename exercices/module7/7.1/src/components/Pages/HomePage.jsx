@@ -1,8 +1,8 @@
 const HomePage = () => {
   return (
     <div>
-      <h1>Home Page</h1>
-      <p>Welcome to my favorite movies website!</p>
+      <h1>Welcome to iMovies</h1>
+      <p>This is the home page.</p>
     </div>
   );
 };

@@ -1,10 +1,9 @@
 import "./Footer.css";
 
-const Footer = ({ children, urlLogo }) => {
+const Footer = () => {
   return (
-    <footer className="footer">
-      <div>{children}</div>
-      <img src={urlLogo} alt="logo" className="logo" />
+    <footer>
+      <p>&copy; 2023 iMovies</p>
     </footer>
   );
 };

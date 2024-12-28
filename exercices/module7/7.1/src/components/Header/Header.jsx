@@ -1,10 +1,15 @@
-import "./Header.css";
+import { Link } from 'react-router-dom';
 
-const Header = ({urlLogo, children}) => {
+const Header = () => {
   return (
-    <header className="header">
-      <img src={urlLogo} alt="logo" className="logo" />
-      <div>{children}</div>
+    <header>
+      <nav>
+        <ul>
+          <li><Link to="/">Home</Link></li>
+          <li><Link to="/movies">Movies</Link></li>
+          <li><Link to="/cinema">Cinema</Link></li>
+        </ul>
+      </nav>
     </header>
   );
 };
