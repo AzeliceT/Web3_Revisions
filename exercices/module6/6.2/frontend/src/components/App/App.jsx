@@ -28,6 +28,18 @@ const App = () => {
       });
   };
 
+  const deletePerson = (id) => {
+    console.log(`Deleting person with id: ${id}`);
+    axios.delete(`http://localhost:3001/persons/${id}`)
+      .then(response => {
+        console.log('Delete response:', response);
+        setPersons(persons.filter(person => person._id !== id));
+      })
+      .catch(error => {
+        console.error('There was an error deleting the person!', error);
+      });
+  };
+
   return (
     <div>
       <h1>Phonebook</h1>
@@ -44,7 +56,13 @@ const App = () => {
       </form>
       <ul>
         {persons.map(person => (
-          <li key={person.id}>{person.name} {person.number}</li>
+          <li key={person._id}>
+            {person.name} {person.number}
+            <button onClick={() => {
+              console.log(`Button clicked for person with id: ${person._id}`);
+              deletePerson(person._id);
+            }}>delete</button>
+          </li>
         ))}
       </ul>
     </div>

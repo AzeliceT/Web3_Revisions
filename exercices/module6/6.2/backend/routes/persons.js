@@ -20,9 +20,16 @@ router.get("/:id", (req, res) => {
 
 router.delete("/:id", (req, res) => {
   const id = req.params.id;
-  Person.findByIdAndRemove(id).then(() => {
-    res.status(204).end();
-  });
+  console.log(`Attempting to delete person with id: ${id}`);
+  Person.findByIdAndDelete(id)
+    .then(() => {
+      console.log(`Successfully deleted person with id: ${id}`);
+      res.status(204).end();
+    })
+    .catch(error => {
+      console.error(`Error deleting person with id: ${id}`, error);
+      res.status(500).json({ error: 'Something went wrong' });
+    });
 });
 
 router.post("/", (req, res) => {
