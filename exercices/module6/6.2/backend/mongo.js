@@ -19,3 +19,5 @@ const personSchema = new mongoose.Schema({
 const Person = mongoose.model('Person', personSchema);
 
 module.exports = Person;
+
+// add this file

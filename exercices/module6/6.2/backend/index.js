@@ -1,7 +1,6 @@
-require('dotenv').config();
+require('dotenv').config(); //add
 const express = require("express");
 const personsRoutes = require('./routes/persons');
-const Person = require('./mongo');
 
 const PORT = 3001;
 const app = express();
