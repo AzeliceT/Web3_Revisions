@@ -22,7 +22,7 @@ const MovieListPage = () => {
             <img src={movie.imageUrl} alt={movie.title} width="200" />
             <p>{movie.description}</p>
             <p>Budget: ${movie.budget} million</p>
-            <Link to={`/movie/${movie.id}`}>View Details</Link>
+            <Link to={`/movies/${movie.id}`}>View Details</Link>
           </li>
         ))}
       </ul>
