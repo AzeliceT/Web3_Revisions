@@ -1,4 +1,5 @@
 import { useNavigate, useOutletContext } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const MovieListPage = () => {
   const { movies } = useOutletContext();
@@ -11,6 +12,7 @@ const MovieListPage = () => {
   return (
     <div>
       <h1>Movie List</h1>
+      <button onClick={handleAddMovieClick}>Add Movie</button>
       <ul>
         {movies.map((movie, index) => (
           <li key={index}>
@@ -20,10 +22,10 @@ const MovieListPage = () => {
             <img src={movie.imageUrl} alt={movie.title} width="200" />
             <p>{movie.description}</p>
             <p>Budget: ${movie.budget} million</p>
+            <Link to={`/movie/${movie.id}`}>View Details</Link>
           </li>
         ))}
       </ul>
-      <button onClick={handleAddMovieClick}>Add Movie</button>
     </div>
   );
 };

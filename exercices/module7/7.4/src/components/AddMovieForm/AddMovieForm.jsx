@@ -2,8 +2,7 @@ import { useState } from "react";
 import "./AddMovieForm.css";
 import { Input, Button } from 'antd';
 
-
-const AddMovieForm = ({ onMovieAdded }) => {
+const AddMovieForm = ({ onMovieAdded, movies }) => {
   const [title, setTitle] = useState("");
   const [director, setDirector] = useState("");
   const [duration, setDuration] = useState(0);
@@ -11,11 +10,18 @@ const AddMovieForm = ({ onMovieAdded }) => {
   const [description, setDescription] = useState("");
   const [budget, setBudget] = useState(0);
 
-
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    onMovieAdded({ title, director, duration, imageUrl, description, budget });
+    const newMovie = {
+      id: (movies.length + 1).toString(), // Generate a unique ID based on the number of movies
+      title,
+      director,
+      duration,
+      imageUrl,
+      description,
+      budget
+    };
+    onMovieAdded(newMovie);
     setTitle("");
     setDirector("");
     setDuration(0);
@@ -23,7 +29,7 @@ const AddMovieForm = ({ onMovieAdded }) => {
     setDescription("");
     setBudget(0);
   };
-  
+
   return (
     <form onSubmit={handleSubmit}>
       <div>

@@ -6,7 +6,6 @@ import MovieListPage from './components/Pages/MovieListPage';
 import CinemaPage from './components/Pages/CinemaPage';
 import AddMoviePage from './components/Pages/AddMoviePage';
 import MoviePage from './components/Pages/MoviePage';
-import 'antd/dist/antd.css';
 import './index.css';
 
 

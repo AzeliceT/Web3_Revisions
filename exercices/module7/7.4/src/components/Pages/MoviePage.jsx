@@ -6,6 +6,8 @@ const MoviePage = () => {
   const movie = movies.find(m => m.id === parseInt(movieId));
 
   if (!movie) {
+    console.log(movie, "movie");
+    
     return <div>Movie not found</div>;
   }
 
