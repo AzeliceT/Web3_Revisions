@@ -1,63 +1,67 @@
-import { useState } from "react";
-import "./AddMovieForm.css";
-import { Input, Button } from 'antd';
+import { Form, Input, InputNumber, Button } from 'antd';
 
 const AddMovieForm = ({ onMovieAdded }) => {
-  const [title, setTitle] = useState("");
-  const [director, setDirector] = useState("");
-  const [duration, setDuration] = useState(0);
-  const [imageUrl, setImageUrl] = useState("");
-  const [description, setDescription] = useState("");
-  const [budget, setBudget] = useState(0);
+  const [form] = Form.useForm();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleFinish = (values) => {
     const newMovie = {
       id: Date.now(), // Générer un identifiant unique
-      title,
-      director,
-      duration,
-      imageUrl,
-      description,
-      budget,
+      ...values,
     };
     onMovieAdded(newMovie);
-    setTitle("");
-    setDirector("");
-    setDuration(0);
-    setImageUrl("");
-    setDescription("");
-    setBudget(0);
+    form.resetFields();
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label>Title:</label>
-        <Input value={title} onChange={(e) => setTitle(e.target.value)} />
-      </div>
-      <div>
-        <label>Director:</label>
-        <Input value={director} onChange={(e) => setDirector(e.target.value)} />
-      </div>
-      <div>
-        <label>Duration:</label>
-        <Input value={duration} onChange={(e) => setDuration(e.target.value)} />
-      </div>
-      <div>
-        <label>Image URL:</label>
-        <Input value={imageUrl} onChange={(e) => setImageUrl(e.target.value)} />
-      </div>
-      <div>
-        <label>Description:</label>
-        <Input.TextArea value={description} onChange={(e) => setDescription(e.target.value)} />
-      </div>
-      <div>
-        <label>Budget:</label>
-        <Input value={budget} onChange={(e) => setBudget(e.target.value)} />
-      </div>
-      <Button type="primary" htmlType="submit">Add Movie</Button>
-    </form>
+    <Form form={form} onFinish={handleFinish} layout="vertical">
+      <Form.Item
+        label="Title"
+        name="title"
+        rules={[{ required: true, message: 'Please input the title!' }]}
+      >
+        <Input />
+      </Form.Item>
+      <Form.Item
+        label="Director"
+        name="director"
+        rules={[{ required: true, message: 'Please input the director!' }]}
+      >
+        <Input />
+      </Form.Item>
+      <Form.Item
+        label="Duration"
+        name="duration"
+        rules={[{ required: true, message: 'Please input the duration!' }]}
+      >
+        <InputNumber min={0} />
+      </Form.Item>
+      <Form.Item
+        label="Image URL"
+        name="imageUrl"
+        rules={[{ required: true, message: 'Please input the image URL!' }]}
+      >
+        <Input />
+      </Form.Item>
+      <Form.Item
+        label="Description"
+        name="description"
+        rules={[{ required: true, message: 'Please input the description!' }]}
+      >
+        <Input.TextArea />
+      </Form.Item>
+      <Form.Item
+        label="Budget"
+        name="budget"
+        rules={[{ required: true, message: 'Please input the budget!' }]}
+      >
+        <InputNumber min={0} />
+      </Form.Item>
+      <Form.Item>
+        <Button type="primary" htmlType="submit">
+          Add Movie
+        </Button>
+      </Form.Item>
+    </Form>
   );
 };
 

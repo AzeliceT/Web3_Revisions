@@ -7,7 +7,7 @@ import CinemaPage from './components/Pages/CinemaPage';
 import AddMoviePage from './components/Pages/AddMoviePage';
 import MoviePage from './components/Pages/MoviePage';
 import './index.css';
-
+import 'antd/dist/reset.css';
 
 const Main = () => {
   return (
