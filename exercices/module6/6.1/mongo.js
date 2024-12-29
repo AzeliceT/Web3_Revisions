@@ -6,13 +6,9 @@ if (process.argv.length < 3) {
 }
 
 const password = process.argv[2];
-<<<<<<< HEAD
 const command = process.argv[3];
 const url = `mongodb+srv://ana466410:${password}@ana07.4da2x.mongodb.net/phonebook?retryWrites=true&w=majority&appName=Ana07`;
 
-=======
-const url = `mongodb+srv://dahmankawtaar:${password}@kawtar07.kbkqp.mongodb.net/phonebook?retryWrites=true&w=majority&appName=Kawtar07`;
->>>>>>> 1de550d81585ff69f5adabcd248f746bda0483bf
 
 mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true });
 
