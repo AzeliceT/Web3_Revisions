@@ -1,3 +1,49 @@
 @baseUrl=http://localhost:3001
 
-### Complete this file with your own request to tests your API
+### Get all books
+GET {{baseUrl}}/books
+
+### Add a valid comment to a book SUCCESFULLY
+POST {{baseUrl}}/comments/book/6461f476d9a9da9dbeade34e/comment
+Content-Type: application/json
+
+{
+  "username": "validUser",
+  "content": "This book is fascinating and very well written."
+}
+
+### Add an invalid comment (less than 5 characters)
+POST {{baseUrl}}/comments/book/6461f476d9a9da9dbeade35e/comment
+Content-Type: application/json
+
+{
+  "username": "validUser",
+  "content": "Bad"
+}
+
+### Add a comment with an invalid username (less than 3 characters)
+POST {{baseUrl}}/comments/book/6461f476d9a9da9dbeade35e/comment
+Content-Type: application/json
+
+{
+  "username": "ab",
+  "content": "This book is fascinating and very well written."
+}
+
+### Add a comment to a non-existent book
+POST {{baseUrl}}/comments/book/000000000000000000000000/comment
+Content-Type: application/json
+
+{
+  "username": "validUser",
+  "content": "This book is fascinating and very well written."
+}
+
+### Add a comment to a book already commented by the same user
+POST {{baseUrl}}/comments/book/6461f476d9a9da9dbeade34e/comment
+Content-Type: application/json
+
+{
+  "username": "validUser",
+  "content": "This book is fascinating and very well written."
+}

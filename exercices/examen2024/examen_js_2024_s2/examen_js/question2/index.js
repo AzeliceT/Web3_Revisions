@@ -5,6 +5,9 @@ const mongoose = require('mongoose');
 const middlewares = require('./utils/middlewares');
 const { createDbWithData } = require('./utils/db-creation');
 const { asyncStartMongMemoryServer } = require('./utils/mongo-memory-server');
+const bookRoutes = require('./routes/books'); // Import book routes
+const commentRoutes = require('./routes/comments'); // Import comment routes
+
 
 const startAsyncDbWork = async () => {
   try {
@@ -43,6 +46,10 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(middlewares.logger);
+
+// Use routes
+app.use('/books', bookRoutes); // Add book routes
+app.use('/comments', commentRoutes); // Add comment routes
 
 app.use(middlewares.errorHandler);
 
